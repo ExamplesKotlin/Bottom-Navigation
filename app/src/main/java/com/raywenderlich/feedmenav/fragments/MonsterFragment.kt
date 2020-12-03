@@ -1,18 +1,17 @@
-package com.raywenderlich.feedmenav
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.raywenderlich.feedmenav.R
 
-class CakeFragment : Fragment() {
+class MonsterFragment : Fragment() {
 
   override fun onCreateView(
       inflater: LayoutInflater,
       container: ViewGroup?,
       savedInstanceState: Bundle?
   ): View? {
-    return inflater.inflate(R.layout.fragment_cake, container, false)
+    return inflater.inflate(R.layout.fragment_monster, container, false)
   }
 }
