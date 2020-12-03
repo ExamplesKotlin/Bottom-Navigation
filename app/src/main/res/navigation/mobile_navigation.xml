@@ -12,9 +12,21 @@
     <fragment
         android:id="@+id/navigation_slug"
         android:name="com.raywenderlich.feedmenav.fragments.SlugFragment"
-        android:label="@string/slug" />
+        android:label="@string/slug" >
+        <action
+            android:id="@+id/action_cake"
+            app:destination="@id/navigation_cake"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_pizza"
         android:name="com.raywenderlich.feedmenav.fragments.PizzaFragment"
         android:label="@string/pizza" />
+    <fragment
+        android:id="@+id/navigation_cake"
+        android:name="com.raywenderlich.feedmenav.fragments.CakeFragment"
+        android:label="@string/cake" />
 </navigation>
