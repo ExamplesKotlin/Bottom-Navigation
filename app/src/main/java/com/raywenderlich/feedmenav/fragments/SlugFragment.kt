@@ -5,8 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
+import com.pandora.bottomnavigator.BottomNavigator
 import com.raywenderlich.feedmenav.R
 import kotlinx.android.synthetic.main.fragment_slug.*
 
@@ -23,6 +22,9 @@ class SlugFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        iWantCake.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_cake, null))
+        iWantCake.setOnClickListener {
+            val navigator = BottomNavigator.provide(activity!!)
+            navigator.addFragment(CakeFragment())
+        }
     }
 }
