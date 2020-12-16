@@ -314,10 +314,12 @@ slide_out_right.xml
 </set>
 ```
 
+## Use Multiple Back Stacks
+
 #### 7 Add the new Library:
 
 ```
-implementation "com.pandora.bottomnavigator:bottom-navigator:1.2"
+implementation 'com.pandora.bottomnavigator:bottom-navigator:1.8'
 ```
 
 And syncronize
@@ -336,16 +338,93 @@ And syncronize
 ```
 
 
-
 #### 9 - Update MainActivity
 
-#### 10
+```
+class MainActivity : AppCompatActivity() {
 
-#### 11
+  private lateinit var navigator: BottomNavigator
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_main)
+
+    navigator = BottomNavigator.onCreate(
+      fragmentContainer = R.id.fragment_container,
+      bottomNavigationView = findViewById(R.id.nav_view),
+      rootFragmentsFactory = mapOf(
+        R.id.navigation_monster to { MonsterFragment() },
+        R.id.navigation_slug to { SlugFragment() }
+      ),
+      defaultTab = R.id.navigation_monster,
+      activity = this
+    )
+  }
+
+  override fun onBackPressed() {
+    if (!navigator.pop())
+    super.onBackPressed()
+  }
+}
+```
+
+#### 10 - Updaye Monster Fragment
+
+```
+class MonsterFragment : Fragment() {
+
+  override fun onCreateView(
+      inflater: LayoutInflater,
+      container: ViewGroup?,
+      savedInstanceState: Bundle?
+  ): View? {
+    return inflater.inflate(R.layout.fragment_monster, container, false)
+  }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        feedMePizza.setOnClickListener {
+            val navigator = BottomNavigator.provide(activity!!)
+            navigator.addFragment(PizzaFragment())
+        }
+    }
+}
+```
+
+#### 11 - Update Slug Fragment
+
+```
+class SlugFragment : Fragment() {
+
+  override fun onCreateView(
+      inflater: LayoutInflater,
+      container: ViewGroup?,
+      savedInstanceState: Bundle?
+  ): View? {
+    return inflater.inflate(R.layout.fragment_slug, container, false)
+  }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        iWantCake.setOnClickListener {
+            val navigator = BottomNavigator.provide(activity!!)
+            navigator.addFragment(CakeFragment())
+        }
+    }
+}
+```
+
+⭐️ Don't forget clean import library
+
+#### 12 - Delete nav and clean dependencies
 
 
 
-## Use Multiple Back Stacks
+
+
+
+
 
 [https://engineering.pandora.com/announcing-bottom-navigator-64f6e426a6b1](https://engineering.pandora.com/announcing-bottom-navigator-64f6e426a6b1)
 
